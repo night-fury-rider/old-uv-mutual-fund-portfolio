@@ -1,10 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.svg';
 import './App.css';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import UvPie from './uv-pie/uv-pie';
+import UvBarChart from './uv-bar-chart/uv-bar-chart';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
             <UvPie></UvPie>
           </Col>
           <Col md={5} xs={12}>
-              <img src={logo} className="App-logo" alt="logo" />
+              <UvBarChart></UvBarChart>
           </Col>
         </Row>
       </Container>
