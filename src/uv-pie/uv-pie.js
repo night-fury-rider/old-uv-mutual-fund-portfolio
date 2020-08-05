@@ -7,6 +7,8 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 import * as appData from './../uv-app-data.json';
+import { uvStore } from './../uv-store';
+import { selectSlice } from './uv-pie-actions';
 
 import './uv-pie.css';
 
@@ -51,7 +53,8 @@ function UvPie() {
       series.slices.template.propertyFields.id = 'id';
 
       series.slices.template.events.on('hit', ((ev) => {
-        //this.uvDashboardService.updateSector(Number(ev.target.id));
+
+        uvStore.dispatch(selectSlice(ev.target.id));
         series.slices.each(((item) => {
           if (item.isActive && item !== ev.target) {
             item.isActive = false;
