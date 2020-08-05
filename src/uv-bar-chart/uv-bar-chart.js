@@ -7,10 +7,19 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import * as appData from './../uv-app-data.json';
 
 import './uv-bar-chart.css';
+import { useSelector } from 'react-redux';
+import uvString from '@uv-tech/util/modules/uv-string';
 
 am4core.useTheme(am4themes_animated);
 
 function UvBarChart() {
+
+  let parentIndex = useSelector(state => {
+    return state.barChart.parentIndex
+  });
+
+  parentIndex = uvString.isNumber(parentIndex) ? parentIndex : 0;
+
   const chart = useRef(null);
 
   useLayoutEffect(() => {
@@ -58,14 +67,14 @@ function UvBarChart() {
 
     series.columns.template.maxHeight =  50;
 
-    uvChart.data = getProcessedData(appData.categories[1].items);
+    uvChart.data = getProcessedData(appData.categories[parentIndex].items);
 
     chart.current = uvChart;
 
     return () => {
       uvChart.dispose();
     };
-  }, []);
+  }, [parentIndex]);
 
   return (
     <div className="bar-chart-container">
